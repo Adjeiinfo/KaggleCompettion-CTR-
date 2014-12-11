@@ -294,9 +294,9 @@ for e in xrange(epoch):
             # holdout: validate with every N instance, train with others
             loss += logloss(p, y)
             count += 1
-       # else:
+        else:
             # step 2-2, update learner with label (click) information
-           # learner.update(x, p, y)
+            learner.update(x, p, y)
 
     print('Epoch %d finished, validation logloss: %f, elapsed time: %s' % (
         e, loss/count, str(datetime.now() - start)))
@@ -306,8 +306,8 @@ for e in xrange(epoch):
 # start testing, and build Kaggle's submission file ##########################
 ##############################################################################
 
-#with open(submission, 'w') as outfile:
-#    outfile.write('id,click\n')
-#    for t, date, ID, x, y in data(test, D):
-#        p = learner.predict(x)
-#        outfile.write('%s,%s\n' % (ID, str(p)))
+with open(submission, 'w') as outfile:
+    outfile.write('id,click\n')
+    for t, date, ID, x, y in data(test, D):
+        p = learner.predict(x)
+        outfile.write('%s,%s\n' % (ID, str(p)))
